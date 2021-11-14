@@ -1,5 +1,9 @@
 require 'socket'
 
+require 'usersendstring.rb'
+require 'nicksendstring.rb'
+require 'joinsendstring.rb'
+
 class Network 
   
   def init(hostname)
@@ -11,28 +15,31 @@ class Network
         break
       end
     end
+
+    botnick = 'ircbot'
+    channel = '#test'
     
     # Perform user authentication
     puts "USER - rubybot\n"
-    sendstring = "USER rubybot rubybot rubybot :ruby\n"
-    @socket.write(sendstring.bytes)
-    ###@socket.write(bytes("USER " + botnick + " " + botnick +" " + botnick + " :python\n"))###, "UTF-8"))
+    send(UserSendString.new.init(botnick))
 
     puts "NICK - rubybot\n"
-    sendstring = "NICK rubybot\n"
-    @socket.write(sendstring.bytes)
-    ###self.irc.send(bytes("NICK " + botnick + "\n"))###, "UTF-8"))
+    send(NickSendString.new.init(botnick))
+
     ### FIXME
-    ### self.irc.send(bytes("NICKSERV IDENTIFY " + botnickpass + " " + botpass + "\n"))###, "UTF-8"))
+    ### send("NICKSERV IDENTIFY " + botnickpass + " " + botpass + "\n")
     sleep(5)
 
     # join the channel
     print "JOIN - rubybot\n"
-    sendstring = "JOIN #test\n"
-    @socket.write(sendstring)###bytes("JOIN " + channel + "\n"))###, "UTF-8"))
+    send(JoinSendString.new.init(channel))
 
   end
 
+  def send(sendstring)
+    @socket.write(sendstring.get.bytes)
+  end
+  
   def mainloop
 
     while (1)
