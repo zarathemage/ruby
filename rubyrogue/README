@@ -1,0 +1,3 @@
+a SDL based game demo programmed in ruby
+
+run 'ruby rubyrogue.rb' in this directory (neesds to find the ./pics dir)
