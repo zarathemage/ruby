@@ -15,6 +15,10 @@ class Tree
     end
 
     def add(e)
+      if @children.length == 0 then
+        return false
+      end
+
       (0..@children.length).each do |i|
         if @children[i].energy > e then
           @children.insert(e)
@@ -27,6 +31,11 @@ class Tree
     end
 
     def search(e)
+
+      if @children.length == 0 then
+        return false
+      end
+
       (0..@children.length).each do |i|
         if @children[i].energy == e then
           return true

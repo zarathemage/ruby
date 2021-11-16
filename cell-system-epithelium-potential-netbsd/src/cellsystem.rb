@@ -1,7 +1,9 @@
-class Cell
+load 'cellgraph.rb'
+
+class CellSystem
 
   def initialize
-    @chromosomes = Array.new
+    @graph = CellGraph.new
   end
 
   def addchromosome(c)
