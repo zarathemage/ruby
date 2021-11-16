@@ -6,7 +6,8 @@ class Tree
   class TreeNode
 
     def initialize
-      @energy = Energy.new 
+      @energy = Energy.new ### NOTE : this contains the functionality of 
+                            ### of the epithelium kinetic or chemical energy  
       @children = Array.new
     end
 
